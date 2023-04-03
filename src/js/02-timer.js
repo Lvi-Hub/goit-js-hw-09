@@ -37,17 +37,21 @@ flatpickr('#datetime-picker', { ...options });
 //--
 const timer = {
   start() {
-    setInterval(() => {
+    const timerId = setInterval(() => {
       const currentTime = Date.now();
       const deltatime = clickedDate - currentTime;
       const { days, hours, minutes, seconds } = convertMs(deltatime);
-      console.log(`${days}:${hours}:${minutes}:${seconds}`);
-      console.log(options.inputClick);
+      // console.log(`${days}:${hours}:${minutes}:${seconds}`);
+      // console.log(options.inputClick);
       ref.days.textContent = `${days}`;
       ref.hours.textContent = `${hours}`;
       ref.minutes.textContent = `${minutes}`;
       ref.seconds.textContent = `${seconds}`;
       console.log(ref.seconds.textContent);
+      if (deltatime < 1000) {
+        clearInterval(timerId);
+      }
+      console.log(deltatime);
     }, 1000);
   },
 };
